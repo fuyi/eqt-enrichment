@@ -103,7 +103,6 @@ def enrich(spark, output_path):
     df_org = (
         spark.read
         .schema(schema_org)
-        .option("mode", "FAILFAST")
         .json('gs://motherbrain-external-test/interview-test-org.json.gz')
         .cache()
     )

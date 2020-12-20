@@ -1,9 +1,10 @@
 from pyspark.sql.types import (
+    # ByteType,
     StructType,
     StructField,
     StringType,
     DateType,
-    # IntegerType,
+    # LongType,
     DecimalType,
     ArrayType
 )
@@ -15,7 +16,7 @@ schema_funding_rounds = StructType([
     # FIXME: IntegerType returns null
     StructField('investor_count', StringType(), True),
     StructField('investor_names', StringType(), True),
-    StructField('raised_amount_usd', DecimalType(), True),
+    StructField('raised_amount_usd', DecimalType(18), True),
 ])
 
 schema_org = StructType([
