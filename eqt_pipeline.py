@@ -1,3 +1,4 @@
+from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import struct, collect_list
 
@@ -57,39 +58,74 @@ def run_crawler():
     c.start()
 
 
-def enrich(output_path):
+def config_spark(debug_mode: bool) -> SparkSession:
+    # FIXME: disable authentication for public bucket access
+    conf = SparkConf() \
+        .setMaster("local[2]") \
+        .setAppName("EQT ETL") \
+        .set("spark.jars", "libs/gcs-connector-latest-hadoop2.jar") \
+        .set(
+            "spark.hadoop.google.cloud.auth.service.account.enable",
+            "true"
+        ) \
+        .set(
+            "spark.hadoop.google.cloud.auth.service.account.json.keyfile",
+            "libs/pyspark-gcs.json"
+        )
+
+    sc = SparkContext(conf=conf)
+
+    if debug_mode:
+        sc.setLogLevel('DEBUG')
+
     spark = SparkSession \
         .builder \
-        .appName("EQT funding") \
+        .config(conf=sc.getConf()) \
         .getOrCreate()
 
+    # add support for gcs file system
+    spark._jsc.hadoopConfiguration().set(
+        'fs.gs.impl',
+        'com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem'
+    )
+    return spark
+
+
+def enrich(spark, output_path):
     df_funding_rounds = (
         spark.read
         .schema(schema_funding_rounds)
-        .json(f'{DIR_PATH}/datasets/interview-test-funding.json')
+        .option("mode", "FAILFAST")
+        .json('gs://motherbrain-external-test/interview-test-funding.json.gz')
+        .cache()
     )
 
     df_org = (
         spark.read
         .schema(schema_org)
-        .json(f'{DIR_PATH}/datasets/interview-test-org.json')
+        .option("mode", "FAILFAST")
+        .json('gs://motherbrain-external-test/interview-test-org.json.gz')
+        .cache()
     )
 
     df_pf = (
         spark.read
         .schema(schema_pf)
+        .option("mode", "FAILFAST")
         .json(f'{DIR_PATH}/datasets/current_portfolio_scraped.json')
     )
 
     df_dinvestment = (
         spark.read
         .schema(schema_pf)
+        .option("mode", "FAILFAST")
         .json(f'{DIR_PATH}/datasets/dinvestment_scraped.json')
     )
 
     df_active_funds = (
         spark.read
         .schema(schema_active_funds)
+        .option("mode", "FAILFAST")
         .json(f'{DIR_PATH}/datasets/active_funds_scraped.json')
     )
 
@@ -125,12 +161,8 @@ def enrich(output_path):
         *FUND_DETAIL_COLUMNS
     ).sort('company_name')
 
-    # df_final.show(truncate=False)
-
-    # import pdb; pdb.set_trace()
     logging.info(f'------ final dataset is written to: {output_path}')
-    df_final.write.mode('overwrite').parquet(output_path)
-    # df_final.write.mode('overwrite').parquet('/Users/yi.fu/yi-ouput-absolute')
+    df_final.repartition(1).write.mode('overwrite').parquet(output_path)
 
 
 @click.command()
@@ -147,10 +179,18 @@ def enrich(output_path):
     help='Skip web scraping if it has done before',
     show_default=True
 )
-def pipeline(output_path, skip_crawler):
+@click.option(
+    '--debug_mode',
+    default=False,
+    type=bool,
+    help='Set to true to enable spark debug log',
+    show_default=True
+)
+def pipeline(output_path, skip_crawler, debug_mode):
     """CLI tool to enrich EQT portfolio companies data"""
     # Step 1: Crawl EQT website
     if not skip_crawler:
         run_crawler()
     # Step 2: data enrichment
-    enrich(output_path)
+    spark = config_spark(debug_mode)
+    enrich(spark, output_path)
