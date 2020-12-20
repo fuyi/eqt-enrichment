@@ -15,6 +15,7 @@ from schemas import (
     schema_pf,
     schema_active_funds
 )
+from functions import dataframe_union
 
 COMPANY_DETAIL_COLUMNS = [
     'sector',
@@ -129,7 +130,7 @@ def enrich(spark, output_path):
     )
 
     # union active and dinvested portfolio companies
-    df_pf_all = df_pf.union(df_dinvestment)
+    df_pf_all = dataframe_union(df_pf, df_dinvestment)
 
     df_pf_funding = df_pf_all.join(
         df_funding_rounds,
