@@ -154,12 +154,15 @@ def enrich(spark, output_path):
                   .join(df_active_funds, how='left', on=('fund'))
     )
 
-    df_final = df2.select(
+    # Pick only needed columns in the final dataframe
+    df_final = (df2.select(
         'company_name',
         'fund_rounds',
         *COMPANY_DETAIL_COLUMNS,
         *FUND_DETAIL_COLUMNS
-    ).sort('company_name')
+    ).dropDuplicates(['company_name', 'fund'])
+        .sort('company_name')
+    )
 
     logging.info(f'------ final dataset is written to: {output_path}')
     df_final.repartition(1).write.mode('overwrite').parquet(output_path)
