@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "nordicpay",
+  "private_key_id": "62604b220a804c9add42db0026fe80e15bf1eb08",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCtTeCRMMiXoma1\nDrgNzw0Q78YMTwnnooJPlq9qqRoE8e2spFMnccZYY1jW4yx52K04u9mNIVbP0Qgk\nN4xfDeHi1OA4+Zp8t93OblYvIMAqp/z9MJ1LIg7ULyCYfdGR1Jud7gDuryR+JMoc\npNQOcqX7iRKF3Oow8KQJVaNH8SEhy1s6PqKz4Iq1TyaAmPnV88ySRDA5K/GFZozb\ns+yS4MZ34TvkJTL5/y1ym+UNpgEQ2RPOMNaKHn5NUj3UlMjLcst7Zxu10cENhCXn\nUr5DUV9nf3fts14MYdn0XED8V5m3kC5q6GbO1mJRGqKTZwZbEchzIeusHoT3/PQu\n6IFlu+NhAgMBAAECgf8GurLXr0kegYXWJrMXMcxYP/tijpKjzm+ONJCeyYVNoA9F\n/Nyz1x5ebl4Zmi9y1zyyOXybDEPcwQyvoYqwP/VTMsBDiDzWgeHNr+pUEPi/bQ1l\nO4v83yRUpjazkwapmEGloXkH0WhJsvsAjMafvhvDQe1JkTYb5SyVXZBgCN4PrMWY\ndWf1Cf7aDeY+vIjxpJPAena3w/EgCLEXrURy2Z4dGVMBhy05o4AC2ETbxdUhrOsI\n5wGp5fNJOgpYHJWdPEDmkUkCyoMD8Flyns+X+SUFH/K8tGlCvsUiBHrOZYvarUqh\ntRd3nPezA7IXO4YCE/EQcDwGFhQsIbL1jC4UW6ECgYEA2l6pTey5El1EKZ7tlN2z\nIZ1NPIziM7PXQkHt/q2AsqCYDCmrv1m7dAeT3x/wdRxhtSx4Y3dfeh/+rFlaUcy6\nbrfimRi5YdRxtXHG1PsjVhGvShd5cSg0HlKJ+CXyiOXgohRpritJYuIJk3PJDqt7\nIFEQkUDom0gC+sLx0NfyiW0CgYEAyysoWB+jOyDYI9w1Z27yLkK6riLmnjutYHoo\n0mPdlg1wHpuxDWb7f06e+uqgPvf5bly3UEXggH1dI6HEFBXCREVs2ft23uVx3Wnb\n+5uL7gD578JYVAcVLTIPsfZvQq7z+x5mA9jo7DMLGqtSl/a0ycMB1Ma3MgVEwlEw\nKG9JnUUCgYBSo/RquyWnH4jGP5El/2jlVcR/H8oTSwIx3wWUllDYSRKBt9t5hRn9\n5Ug+7rVvfJg1mmjNK8YET8tvqjkWL+Z2ND0bN1IhBecqha57t7c9wV+XKJ8bBd4D\ng7UXJjVNPcHvVM5RzavuMiDxnqX+WUM1jbg5YFknOu91uwUMxkzRWQKBgBrdeBY/\nCLyW2T3UrpMgzpFjbX/9SXV++qwZOzCm1/QxjrPdbooRJgxtfwQ65jmtXKRFSlAp\nDUiwSxKdH2pwfiG89GnWoJ9Uw7u9dcNNjDFKm8Iidr+VuC0jw4OKzKeKruRz3pV/\npz0kesFqCh/iFYHgcWuLY0oP/EmdprqSDK/pAoGAb+eEQZ4hHIy52FTkMqb/Hknz\nsz8Fq7zmyt/YqZM+3u3lWZGhsuPbw6b+xhAS/aUW+9Y0tneKpmT26uPL3wS6eq7r\nHW99O8JPWncGyrdJ0gzedRtzcG4EB8MPcL0g9/2yzSL9/hMVU215KNhYUnnWgR71\nwyIdAbhAB4HTyCzKKsk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pyspark-gcs@nordicpay.iam.gserviceaccount.com",
+  "client_id": "115964962680747128462",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pyspark-gcs%40nordicpay.iam.gserviceaccount.com"
+}

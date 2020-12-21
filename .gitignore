@@ -1,6 +1,5 @@
 .pytest_cache
 .vscode
-libs
 output
 .python-version
 datasets/*_scraped.json
