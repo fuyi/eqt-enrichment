@@ -19,7 +19,7 @@ Tips: Use [pyenv](https://github.com/pyenv/pyenv) to manage python versions
 1. Checkout source code
 
 ```bash
-git@github.com:fuyi/eqt-enrichment-private.git
+git clone git@github.com:fuyi/eqt-enrichment.git
 ```
 
 2. Change to project directory
